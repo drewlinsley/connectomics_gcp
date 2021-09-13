@@ -22,7 +22,7 @@ spec:
         # The official TensorFlow 1.15.2 image.
         # https://hub.docker.com/r/tensorflow/tensorflow
         # image: tensorflow/tensorflow:1.15.2
-        image: gcr.io/deeplearning-platform-release/tf2-gpu.2-6
+        image: tensorflow/tensorflow:2.3.0
         command: ["/bin/sh"]
         args:
           - -c
