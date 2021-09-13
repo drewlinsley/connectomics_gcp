@@ -117,11 +117,11 @@ def main(argv):
   train_input_shapes = None
   eval_input_shapes = None
   if FLAGS.mode in ('train', 'train_and_eval'):
-    train_input_fn = input_reader.LiverInputFn(
+    train_input_fn = input_reader.CelltypeInputFn(
         params.training_file_pattern, params, mode=tf.estimator.ModeKeys.TRAIN)
     train_input_shapes = train_input_fn.get_input_shapes(params)
   if FLAGS.mode in ('eval', 'train_and_eval'):
-    eval_input_fn = input_reader.LiverInputFn(
+    eval_input_fn = input_reader.CelltypeInputFn(
         params.eval_file_pattern, params, mode=tf.estimator.ModeKeys.EVAL)
     eval_input_shapes = eval_input_fn.get_input_shapes(params)
 

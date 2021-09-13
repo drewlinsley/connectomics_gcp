@@ -110,13 +110,13 @@ class InputFn(object):
     return dataset
 
 
-class LiverInputFn(InputFn):
-  """Input function of Liver Segmentation data set."""
+class CelltypeInputFn(InputFn):
+  """Input function of Celltype Segmentation data set."""
 
   def create_parser_fn(self, params):
     """Create parse fn to extract tensors from tf.Example."""
 
-    def _decode_liver_example(serialized_example):
+    def _decode_celltype_example(serialized_example):
       """Parses a single tf.Example into image and label tensors."""
       features = {}
 
@@ -129,9 +129,9 @@ class LiverInputFn(InputFn):
       # the `label` is a binary matrix, whose last dimension is one_hot encoded
       # labels.
       # The dtype of `label` can be either float32 or int64.
-      image = tf.decode_raw(parsed['image/ct_image'],
+      image = tf.decode_raw(parsed['volume'],
                             tf.as_dtype(tf.float32))
-      label = tf.decode_raw(parsed['image/label'],
+      label = tf.decode_raw(parsed['label'],
                             tf.as_dtype(params.label_dtype))
 
       image_size = params.input_image_size + [params.num_channels]
@@ -152,7 +152,7 @@ class LiverInputFn(InputFn):
         label = tf.cast(label, dtype=tf.int32)
       return image, label
 
-    return _decode_liver_example
+    return _decode_celltype_example
 
   def get_input_shapes(self, params):
     image_size = params.input_image_size + [params.num_channels]

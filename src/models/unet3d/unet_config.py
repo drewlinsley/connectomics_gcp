@@ -43,15 +43,15 @@ UNET_CONFIG = {
     'optimizer': 'adam',
     'momentum': 0.9,
     # Spatial dimension of input image.
-    'input_image_size': [128, 128, 128],
+    'input_image_size': [64, 64, 64],
     # Number of channels of the input image.
-    'num_channels': 1,
+    'num_channels': 2,
     # Spatial partition dimensions.
     'input_partition_dims': None,
     # Use deconvolution to upsample, otherwise upsampling.
     'deconvolution': True,
     # Number of areas i need to segment
-    'num_classes': 3,
+    'num_classes': 6,
     # Number of filters used by the architecture
     'num_base_filters': 32,
     # Depth of the network
