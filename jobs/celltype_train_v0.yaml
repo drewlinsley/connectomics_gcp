@@ -18,7 +18,7 @@ spec:
         runAsUser: 0
       restartPolicy: OnFailure
       containers:
-      - name: resnet-tpu
+      - name: celltype-train-tpu
         # The official TensorFlow 1.15.2 image.
         # https://hub.docker.com/r/tensorflow/tensorflow
         # image: tensorflow/tensorflow:1.15.2
