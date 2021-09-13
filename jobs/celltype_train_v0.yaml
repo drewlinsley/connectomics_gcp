@@ -1,7 +1,9 @@
+# https://cloud.google.com/deep-learning-containers/docs/choosing-container
+
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: hmax-tpu
+  name: celltype-train-tpu
 spec:
   # parallelism: 8  # Matches number of preemptables. This is the queue size.
   template:
@@ -20,20 +22,20 @@ spec:
         # The official TensorFlow 1.15.2 image.
         # https://hub.docker.com/r/tensorflow/tensorflow
         # image: tensorflow/tensorflow:1.15.2
-        image: gcr.io/kubeflow-images-public/tensorflow-2.1.0-notebook-gpu:1.0.0
+        image: gcr.io/deeplearning-platform-release/tf2-gpu.2-6
         command: ["/bin/sh"]
         args:
           - -c
           - >-
-            git clone https://github.com/drewlinsley/hmax_tpu.git &&
-            cd hmax_tpu &&
+            git clone https://github.com/drewlinsley/connectomics_gcp.git &&
+            cd connectomics_gcp &&
             pip3 install --upgrade pip &&
             pip3 install -r requirements.txt &&
             pip3 install -U tpunicorn &&
             export PATH="$HOME/.local/bin:$PATH" &&
             pu list &&
-            EXP_NAME=resnet_baseline
-            bash jobs/hmax_supervised.sh $EXP_NAME $(KUBE_GOOGLE_CLOUD_TPU_ENDPOINTS)
+            EXP_NAME=unet_celltyper
+            bash src/run/train_celltype.sh $EXP_NAME $(KUBE_GOOGLE_CLOUD_TPU_ENDPOINTS)
         resources:
           limits:
             # Request a single Preemptible v2-8 Cloud TPU device to train the

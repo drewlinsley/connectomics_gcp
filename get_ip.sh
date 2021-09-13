@@ -1,0 +1,1 @@
+curl -i icanhazip.com

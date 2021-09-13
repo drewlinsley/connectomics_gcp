@@ -1,0 +1,6 @@
+absl-py
+tensorflow-gpu==2.6.0
+cloud-tpu-profiler>=1.12
+numpy
+pyyaml
+pytype
