@@ -20,7 +20,7 @@ TRAIN_FILES="${DATA_BUCKET}/tfrecords/celltype/*train*.tfrecords"
 VAL_FILES="${DATA_BUCKET}/tfrecords/celltype/*val*.tfrecords"
 TS=$(date +%s)
 EXP_NAME=$experiment_name_${TS}
-EXPORT_DIR=$DATA_BUCKET/connectomics/served_models/${EXP_NAME}
+# EXPORT_DIR=$DATA_BUCKET/connectomics/served_models/${EXP_NAME}
 
 bash get_ip.sh
 
@@ -31,8 +31,8 @@ python src/models/unet3d/unet_main.py \
 --eval_file_pattern="${VAL_FILES}" \
 --iterations_per_loop=10 \
 --mode=train \
---config_file="src/models/unet3d/configs/cloud/v3-8_128x128x128_ce.yaml" \
---export_dir=$EXPORT_DIR
+--config_file="src/models/unet3d/configs/cloud/v3-8_128x128x128_ce.yaml"
+# --export_dir=$EXPORT_DIR
 
 
 # --params_override="{\"optimizer\":\"momentum\",\"train_steps\":100}" \
