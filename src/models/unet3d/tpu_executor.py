@@ -165,7 +165,7 @@ class TPUEstimatorExecuter(object):
     # Sets up config for TPUEstimator.
     tpu_config = tf.estimator.tpu.TPUConfig(
         tpu_flags.iterations_per_loop,
-        num_shards=num_shards,
+        num_shards=None,  # num_shards,
         num_cores_per_replica=num_cores_per_replica,
         input_partition_dims=input_partition_dims,
         per_host_input_for_training=tf.estimator.tpu.InputPipelineConfig.PER_HOST_V2  # pylint: disable=line-too-long
