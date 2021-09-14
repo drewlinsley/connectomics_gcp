@@ -16,7 +16,7 @@ clusters create "$CLUSTER_NAME" \
 --machine-type "n1-standard-4" \
 --image-type "UBUNTU" \
 --disk-type "pd-standard" \
---disk-size "20" \
+--disk-size "100" \
 --scopes "https://www.googleapis.com/auth/cloud-platform" --preemptible \
 --max-nodes "$MAX_NODES" \
 --min-nodes "$MIN_NODES" \

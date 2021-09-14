@@ -29,6 +29,9 @@ kubectl get pod tensorboard -w
 kubectl port-forward pod/tensorboard 6006  # Access the TB at http://localhost:6006
 kubectl delete pod tensorboard
 
+# Get info on pod events
+kubectl describe pods
+
 # Delete pods in the cluster
 kubectl delete pods <pod-name>
 kubectl delete --all pods
