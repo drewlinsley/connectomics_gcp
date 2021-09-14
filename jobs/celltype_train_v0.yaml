@@ -12,21 +12,24 @@ spec:
         # The Cloud TPUs that will be created for this Job will support
         # TensorFlow 2.2. This version MUST match the
         # TensorFlow version that your model is built on.
-        tf-version.cloud-tpus.google.com: "2.1"
+        tf-version.cloud-tpus.google.com: "2.3"
     spec:
       securityContext:
         runAsUser: 0
-      restartPolicy: OnFailure
+      restartPolicy: Never
       containers:
       - name: celltype-train-tpu
         # The official TensorFlow 1.15.2 image.
         # https://hub.docker.com/r/tensorflow/tensorflow
         # image: tensorflow/tensorflow:1.15.2
-        image: tensorflow/tensorflow:2.3.0
+        # image: tensorflow/tensorflow:2.3.0
+        image: gcr.io/deeplearning-platform-release/tf2-gpu.2-3
         command: ["/bin/sh"]
         args:
           - -c
           - >-
+            sudo apt-get update
+            sudo apt-get install git-all
             git clone https://github.com/drewlinsley/connectomics_gcp.git &&
             cd connectomics_gcp &&
             pip3 install --upgrade pip &&
