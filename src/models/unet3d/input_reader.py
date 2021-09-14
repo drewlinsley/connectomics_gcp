@@ -46,13 +46,13 @@ class InputFn(object):
       features = tf.parse_example(
           [serialized_example],
           features={
-              'image/encoded': tf.VarLenFeature(dtype=tf.float32),
-              'image/segmentation/mask': tf.VarLenFeature(dtype=tf.float32),
+              'volume': tf.VarLenFeature(dtype=tf.float32),
+              'label': tf.VarLenFeature(dtype=tf.float32),
           })
-      image = features['image/encoded']
+      image = features['volume']
       if isinstance(image, tf.SparseTensor):
         image = tf.sparse_tensor_to_dense(image)
-      gt_mask = features['image/segmentation/mask']
+      gt_mask = features['label']
       if isinstance(gt_mask, tf.SparseTensor):
         gt_mask = tf.sparse_tensor_to_dense(gt_mask)
 
@@ -120,8 +120,8 @@ class CelltypeInputFn(InputFn):
       """Parses a single tf.Example into image and label tensors."""
       features = {}
 
-      features['image/ct_image'] = tf.FixedLenFeature([], tf.string)
-      features['image/label'] = tf.FixedLenFeature([], tf.string)
+      features['volume'] = tf.FixedLenFeature([], tf.string)
+      features['label'] = tf.FixedLenFeature([], tf.string)
 
       parsed = tf.parse_single_example(serialized_example, features=features)
 

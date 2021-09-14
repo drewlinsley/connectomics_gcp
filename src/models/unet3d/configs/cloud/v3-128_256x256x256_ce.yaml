@@ -2,7 +2,7 @@ init_learning_rate: 0.0001  # with 0.005 the network is unstable
 loss: 'adaptive_dice32'
 train_batch_size: 512
 eval_batch_size: 1
-# input_partition_dims: [1,1,2,2,1]
+input_partition_dims: [1,1,32,32,1]
 use_index_label_in_train: true
 
 input_image_size: [64, 128, 128]
