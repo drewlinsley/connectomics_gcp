@@ -28,8 +28,8 @@ spec:
         args:
           - -c
           - >-
-            apt-get update
-            apt-get install git-all
+            apt-get update &&
+            apt-get install git-all &&
             git clone https://github.com/drewlinsley/connectomics_gcp.git &&
             cd connectomics_gcp &&
             pip3 install --upgrade pip &&
