@@ -38,7 +38,7 @@ spec:
             export PATH="$HOME/.local/bin:$PATH" &&
             export PYTHONPATH=$PYTHONPATH:$(pwd)
             pu list &&
-            EXP_NAME=unet_celltyper
+            EXP_NAME=unet_celltyper &&
             bash src/run/train_celltype.sh $EXP_NAME $(KUBE_GOOGLE_CLOUD_TPU_ENDPOINTS)
         resources:
           limits:
