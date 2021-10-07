@@ -233,7 +233,7 @@ class TPUEstimatorExecuter(object):
           write_summary(eval_results, summary_writer, current_step)
 
         if current_step >= self._params.train_steps:
-          logging.info('Evaluation finished after training step %d',
+          logging.info('Evaluation finisheds after training step %d',
                        current_step)
           break
       except tf.errors.NotFoundError:
