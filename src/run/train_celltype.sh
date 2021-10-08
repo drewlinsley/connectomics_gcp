@@ -12,7 +12,7 @@ experiment_name=Test  # $1  # finetune_BU_{bu_loss}_TD_{td_loss}_R50_lr0.1_T0.1
 # export TPU_NAME=$tpu_name  # 'prj-selfsup-tpu'
 export STORAGE_BUCKET='gs://serrelab'
 # DATA_DIR=$STORAGE_BUCKET/imagenet_dataset/imagenet2012/5.0.0/
-DATA_BUCKET=$STORAGE_BUCKET
+DATA_BUCKET=$STORAGE_BUCKET/connectomics
 MODEL_DIR=$DATA_BUCKET/connectomics/results/$experiment_name
 gsutil mkdir $MODEL_DIR
 
