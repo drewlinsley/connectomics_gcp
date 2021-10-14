@@ -134,9 +134,14 @@ class CelltypeInputFn(InputFn):
       label = tf.decode_raw(parsed['label'],
                             tf.as_dtype(params.label_dtype))
 
+      print("*" * 60)
+      print("image size")
+      print("*" * 60)
       image_size = params.input_image_size + [params.num_channels]
       image = tf.reshape(image, image_size)
       label_size = params.input_image_size + [params.num_classes]
+      print(image_size)
+      print(label_size)
       label = tf.reshape(label, label_size)
       if self._is_training and params.use_index_label_in_train:
         # Use class index for labels and remove the channel dim (#channels=1).
