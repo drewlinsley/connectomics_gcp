@@ -97,11 +97,11 @@ class InputFn(object):
     dataset = dataset.apply(
         tf.data.experimental.parallel_interleave(
             lambda file_name: self._dataset_fn(file_name).prefetch(1),
-            cycle_length=32,
+            # cycle_length=32,
             sloppy=self._is_training))
 
-    if self._is_training:
-      dataset = dataset.shuffle(64)
+    # if self._is_training:
+    #   dataset = dataset.shuffle(64)
 
     # Parses the fetched records to input tensors for model function.
     dataset = dataset.map(self._parser_fn, num_parallel_calls=64)
