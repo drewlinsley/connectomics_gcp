@@ -4,6 +4,6 @@ train_batch_size: 1024
 eval_batch_size: 1024
 input_partition_dims: [1,1,2,2,1]
 use_index_label_in_train: false
-
+train_steps: 1000000
 input_image_size: [64, 128, 128]
 label_dtype: 'float32'
