@@ -1,6 +1,6 @@
 absl-py
 tensorflow-gpu==2.3.0
 cloud-tpu-profiler>=1.12
-numpy
+numpy==1.18.0
 pyyaml
 pytype

@@ -43,11 +43,12 @@ class InputFn(object):
 
     def _parser(serialized_example):
       """Parses a single tf.Example into image and label tensors."""
+      raise NotImplementedError("Bad route")
       features = tf.parse_example(
           [serialized_example],
           features={
-              'volume': tf.VarLenFeature(dtype=tf.float32),
-              'label': tf.VarLenFeature(dtype=tf.float32),
+              'volume': tf.io.FixedLenFeature([], dtype=tf.float32),
+              'label': tf.io.FixedLenFeature([], dtype=tf.float32),
           })
       image = features['volume']
       if isinstance(image, tf.SparseTensor):
@@ -125,28 +126,24 @@ class CelltypeInputFn(InputFn):
 
       parsed = tf.parse_single_example(serialized_example, features=features)
 
-      # Here, assumes the `image` is normalized to [0, 1] of type float32 and
-      # the `label` is a binary matrix, whose last dimension is one_hot encoded
-      # labels.
-      # The dtype of `label` can be either float32 or int64.
-      image = tf.decode_raw(parsed['volume'],
-                            tf.as_dtype(tf.float32))
-      label = tf.decode_raw(parsed['label'],
-                            tf.as_dtype(params.label_dtype))
 
-      print("*" * 60)
-      print("image size")
-      print("*" * 60)
-      image_size = params.input_image_size + [params.num_channels]
-      image = tf.reshape(image, image_size)
-      label_size = params.input_image_size + [params.num_classes]
-      print(image_size)
-      print(label_size)
-      label = tf.reshape(label, label_size)
-      if self._is_training and params.use_index_label_in_train:
-        # Use class index for labels and remove the channel dim (#channels=1).
-        channel_dim = -1
-        label = tf.argmax(label, axis=channel_dim, output_type=tf.int32)
+      image_bytes = tf.reshape(parsed['volume'], shape=[])
+      label_bytes = tf.reshape(parsed['label'], shape=[])
+
+
+      # print("*" * 60)
+      # print("image size")
+      # print("*" * 60)
+      # image_size = params.input_image_size + [params.num_channels]
+      # image = tf.reshape(image, image_size)
+      # label_size = params.input_image_size + [params.num_classes]
+      # print(image_size)
+      # print(label_size)
+      # label = tf.reshape(label, label_size)
+      image = tf.io.decode_raw(image_bytes, tf.float32)
+      image = tf.reshape(image, [64, 128, 128, 2])
+      label = tf.io.decode_raw(label_bytes, tf.float32)
+      label = tf.reshape(label, [64, 128, 128, 6])
 
       if params.use_bfloat16:
         image = tf.cast(image, dtype=tf.bfloat16)
