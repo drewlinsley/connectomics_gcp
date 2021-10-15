@@ -31,7 +31,7 @@ python3 src/models/unet3d/unet_main.py \
 --eval_file_pattern="${VAL_FILES}" \
 --iterations_per_loop=10 \
 --mode=train \
---config_file="src/models/unet3d/configs/cloud/v3-8_128x128x128_ce.yaml"
+--config_file="src/models/unet3d/configs/cloud/v3-256.yaml"
 # --export_dir=$EXPORT_DIR
 
 
