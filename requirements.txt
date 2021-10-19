@@ -4,3 +4,7 @@ cloud-tpu-profiler>=1.12
 numpy==1.18.0
 pyyaml
 pytype
+pandas
+tensorflow_datasets
+rising
+pytorch-lightning
