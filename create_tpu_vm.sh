@@ -1,5 +1,6 @@
 TPU=tf-vm
 ZONE=europe-west4-a
+ZONE=us-central1-a
 
 gcloud alpha compute tpus tpu-vm create $TPU \
 --zone=$ZONE \

@@ -1,25 +1,19 @@
 VMNAME=pytorch
 TPUNAME=pytorch-tpu
-ZONE=us-central1-a  # europe-west4-a
-ZONE=europe-west4-a
+ZONE=us-central1-f  # europe-west4-a
+# ZONE=europe-west4-a
+# ZONE=us-east1-d
 TPU=v3-8
 
 
-gcloud compute instances delete $VMNAME --zone=$ZONE --quiet
+gcloud compute instances delete $TPUNAME --zone=$ZONE --quiet
 
-gcloud compute instances create $VMNAME \
---zone=$ZONE  \
---machine-type=n1-standard-16  \
---image-family=torch-xla \
---image-project=ml-images  \
---boot-disk-size=200GB \
---scopes=https://www.googleapis.com/auth/cloud-platform
-
-gcloud compute tpus create $TPUNAME \
+gcloud alpha compute tpus tpu-vm create $TPUNAME \
 --zone=$ZONE \
---network=default \
---version=pytorch-1.9 \
---accelerator-type=$TPU
+--accelerator-type=v3-8 \
+--version=v2-alpha \
+# --boot-disk-size=200GB \
 
-gcloud compute ssh $TPUNAME --zone=$ZONE
+gcloud alpha compute tpus tpu-vm ssh $TPUNAME \
+  --zone $ZONE
 
